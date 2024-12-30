@@ -1,0 +1,40 @@
+.dashboard {
+  padding: 2rem;
+  background-color: #f7fafc;
+  min-height: 100vh;
+}
+
+.accountInfo {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.holdings {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ftHoldings, .nftHoldings {
+  flex: 1;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.transactions {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}

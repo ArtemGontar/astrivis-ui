@@ -1,0 +1,32 @@
+/* src/components/Navbar/Navbar.module.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a202c;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLinks li a {
+  color: #a0aec0;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.active {
+  color: #fff;
+  border-bottom: 2px solid #63b3ed;
+}
