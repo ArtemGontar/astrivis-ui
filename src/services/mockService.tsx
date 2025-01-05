@@ -1,98 +1,82 @@
-// src/services/mockService.ts
-
 import { AccountInfo, FTToken, NFTToken, Transaction } from '../types';
 
-export const fetchAccountInfo = async (): Promise<AccountInfo> => {
+export const fetchAccountInfo = async (walletAddress: string): Promise<AccountInfo> => {
   // Simulate API delay
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        address: '0xABCDEF1234567890',
-        totalAssets: 250000,
+        address: 'Gbfudd5GxrcHXJK1Ab96ZsGLwXEt6etjqQmozmu1C91Y',
+        totalAssets: 1.331861972,
+        fungibleTokens: [
+          {
+            id: '00000000-0000-0000-0000-000000000001',
+            name: 'USDC',
+            symbol: 'USDC',
+            amount: 1.143499738,
+            valueUSD: 1.143499738,
+            tokenAddress: '3VkR66qkbAQXwguaKYXHDRPtHuxyU1cXkkkDcJSzhkr8',
+            balance: 0.18836223429349,
+          },
+          {
+            id: '00000000-0000-0000-0000-000000000002',
+            name: 'USDC',
+            symbol: 'USDC',
+            amount: 1.143499738,
+            valueUSD: 1.143499738,
+            tokenAddress: '5mWu7wP3fcSshfRHtXJxoBLGPXzkQAvZpXoAXN5Mm6ms',
+            balance: 1.5e-8,
+          },
+          // Add more mock fungible tokens as needed
+        ],
+        nonFungibleTokens: [
+          {
+            id: '00000000-0000-0000-0000-000000000003',
+            name: 'USDC',
+            symbol: 'USDC',
+            amount: 1.143499738,
+            valueUSD: 1.143499738,
+            tokenAddress: 'EUfByYntmPrr41RNREAA3eNJtibLWmXtznb1vAsPjURq',
+            balance: 1e-9,
+          },
+          {
+            id: '00000000-0000-0000-0000-000000000004',
+            name: 'USDC',
+            symbol: 'USDC',
+            amount: 1.143499738,
+            valueUSD: 1.143499738,
+            tokenAddress: '2RsC8ScNsdWuKBdTu4bqZzo1gdwtBcXeumBtLpiTRTBW',
+            balance: 1e-9,
+          },
+          // Add more mock non-fungible tokens as needed
+        ],
       });
     }, 500);
   });
 };
 
-export const fetchFTHoldings = async (): Promise<FTToken[]> => {
+export const fetchTransactions = async (page: number, pageSize: number): Promise<Transaction[]> => {
+  // Simulate API delay
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
         {
-          id: 'ft1',
-          name: 'Solana Token',
-          symbol: 'SOL',
-          amount: 1000,
-          valueUSD: 250000,
+          id: '1',
+          type: 'Sent',
+          amount: 0.5,
+          token: '3VkR66qkbAQXwguaKYXHDRPtHuxyU1cXkkkDcJSzhkr8',
+          date: '2023-10-01T12:34:56Z',
+          to: 'Gbfudd5GxrcHXJK1Ab96ZsGLwXEt6etjqQmozmu1C91Y',
         },
         {
-          id: 'ft2',
-          name: 'USD Coin',
-          symbol: 'USDC',
-          amount: 5000,
-          valueUSD: 5000,
+          id: '2',
+          type: 'Received',
+          amount: 1.0,
+          token: '5mWu7wP3fcSshfRHtXJxoBLGPXzkQAvZpXoAXN5Mm6ms',
+          date: '2023-10-02T14:20:00Z',
+          from: 'Gbfudd5GxrcHXJK1Ab96ZsGLwXEt6etjqQmozmu1C91Y',
         },
-        // Add more mock FT tokens as needed
+        // Add more mock transactions as needed
       ]);
-    }, 500);
-  });
-};
-
-export const fetchNFTHoldings = async (): Promise<NFTToken[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          id: 'nft1',
-          name: 'CryptoPunk #3100',
-          imageUrl: 'https://via.placeholder.com/100',
-          owner: '0xABCDEF1234567890',
-        },
-        {
-          id: 'nft2',
-          name: 'Bored Ape #9055',
-          imageUrl: 'https://via.placeholder.com/100',
-          owner: '0xABCDEF1234567890',
-        },
-        // Add more mock NFT tokens as needed
-      ]);
-    }, 500);
-  });
-};
-
-export const fetchTransactions = async (page: number, pageSize: number): Promise<{
-  transactions: Transaction[];
-  total: number;
-}> => {
-  // Generate mock transactions
-  const total = 50; // Total number of transactions
-  const transactions: Transaction[] = [];
-
-  for (let i = 1; i <= total; i++) {
-    transactions.push({
-      id: `tx${i}`,
-      type: i % 2 === 0 ? 'Sent' : 'Received',
-      amount: Math.random() * 1000,
-      token: i % 2 === 0 ? 'SOL' : 'USDC',
-      date: new Date(
-        Date.now() - i * 1000 * 60 * 60 * 24
-      ).toLocaleDateString(),
-      from: i % 2 === 0 ? '0xSenderAddress' : undefined,
-      to: i % 2 !== 0 ? '0xRecipientAddress' : undefined,
-    });
-  }
-
-  // Implement pagination
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-  const paginatedTransactions = transactions.slice(start, end);
-
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        transactions: paginatedTransactions,
-        total,
-      });
     }, 500);
   });
 };

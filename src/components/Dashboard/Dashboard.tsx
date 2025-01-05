@@ -10,8 +10,6 @@ import {
 } from '../../types';
 import {
   fetchAccountInfo,
-  fetchFTHoldings,
-  fetchNFTHoldings,
   fetchTransactions,
 } from '../../services/mockService';
 import FTHoldingsTable from '../FtHoldingsTable/FtHoldingsTable';
@@ -26,32 +24,21 @@ const Dashboard: React.FC = () => {
   const [totalTransactions, setTotalTransactions] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 10;
+  const walletAddress = 'Gbfudd5GxrcHXJK1Ab96ZsGLwXEt6etjqQmozmu1C91Y'; // Example wallet address
 
   useEffect(() => {
     const loadAccountInfo = async () => {
-      const data = await fetchAccountInfo();
+      const data = await fetchAccountInfo(walletAddress);
       setAccountInfo(data);
-    };
-
-    const loadFTHoldings = async () => {
-      const data = await fetchFTHoldings();
-      setFtHoldings(data);
-    };
-
-    const loadNFTHoldings = async () => {
-      const data = await fetchNFTHoldings();
-      setNftHoldings(data);
     };
 
     const loadTransactions = async (page: number) => {
       const data = await fetchTransactions(page, pageSize);
-      setTransactions(data.transactions);
-      setTotalTransactions(data.total);
+      setTransactions(data);
+      setTotalTransactions(100);
     };
 
     loadAccountInfo();
-    loadFTHoldings();
-    loadNFTHoldings();
     loadTransactions(currentPage);
   }, [currentPage]);
 
@@ -74,11 +61,11 @@ const Dashboard: React.FC = () => {
       <div className={styles.holdings}>
         <div className={styles.ftHoldings}>
           <h3>FT Holdings</h3>
-          <FTHoldingsTable ftHoldings={ftHoldings} />
+          <FTHoldingsTable ftHoldings={accountInfo.fungibleTokens} />
         </div>
         <div className={styles.nftHoldings}>
           <h3>NFT Holdings</h3>
-          <NFTHoldingsTable nftHoldings={nftHoldings} />
+          <NFTHoldingsTable nftHoldings={accountInfo.nonFungibleTokens} />
         </div>
       </div>
 

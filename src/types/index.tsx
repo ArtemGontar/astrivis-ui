@@ -1,6 +1,8 @@
 export interface AccountInfo {
   address: string;
   totalAssets: number;
+  fungibleTokens: FTToken[];
+  nonFungibleTokens: NFTToken[];
 }
 
 export interface FTToken {
@@ -9,13 +11,18 @@ export interface FTToken {
   symbol: string;
   amount: number;
   valueUSD: number;
+  tokenAddress: string;
+  balance: number;
 }
 
 export interface NFTToken {
   id: string;
   name: string;
-  imageUrl: string;
-  owner: string;
+  symbol: string;
+  amount: number;
+  valueUSD: number;
+  tokenAddress: string;
+  balance: number;
 }
 
 export interface Transaction {
